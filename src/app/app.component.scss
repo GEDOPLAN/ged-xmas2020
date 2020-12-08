@@ -14,6 +14,11 @@ $jumpTime: 500ms;
     img {
       position: absolute;
 
+      &.wish{
+        top: 50px;
+        left: 130px;
+      }
+
       &.top {
         height: 200px;
         z-index: 50;

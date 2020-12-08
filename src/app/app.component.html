@@ -1,8 +1,9 @@
-<div class="root" (click)="jump()">
+<div class="root" (mousedown)="jump()">
   <video autoplay="autoplay" muted="muted" loop="loop" id="snow">
     <source src="assets/snowb.mp4" type="video/mp4">
   </video>
 
+  <img src="assets/wish.png" alt="snowman" class="wish" *ngIf="showMessage">
   <img src="assets/snowm_1.png" alt="snowman" class="top" #snowman>
   <img src="assets/g.png" alt="g" class="letter" #g>
   <img src="assets/e.png" alt="e" class="letter" #e>

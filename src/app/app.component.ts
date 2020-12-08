@@ -23,7 +23,11 @@ export class AppComponent implements AfterViewInit {
 
   currentJump: Subscription;
 
+  currentRun: Subscription;
+
   speed = 1;
+
+  showMessage = false;
 
   constructor(private renderer: Renderer2) {
   }
@@ -38,16 +42,24 @@ export class AppComponent implements AfterViewInit {
 
   private reset(): void {
     // do fail stuff
+    this.letters.forEach(l => l.nativeElement.style.left = '1300px');
+    this.letterIndex = 0;
+    if (this.currentRun) {
+      this.currentRun.unsubscribe();
+    }
+    //
     const letterArray = this.letters.toArray();
-    timer(0, this.speed).subscribe(() => {
+    this.currentRun = timer(0, this.speed).subscribe(() => {
       const letter = letterArray[this.letterIndex].nativeElement;
       const current: string = getComputedStyle(letter).left;
       const newLeft = Number.parseInt(current.replace('px', ''), 10) - 10;
       letter.style.left = newLeft + 'px';
-      if (newLeft < 0) {
-        letter.style.display = 'none';
-
+      if (newLeft < -250) {
         this.letterIndex++;
+        if (this.letterIndex > 7) {
+          this.currentRun.unsubscribe();
+          this.showMessage = true;
+        }
       }
     });
     this.init();
