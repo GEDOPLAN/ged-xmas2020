@@ -1,0 +1,50 @@
+$jumpStart: 50px;
+$jumpHeight: 150px;
+$jumpTime: 500ms;
+
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  div.root {
+    position: relative;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+
+      &.top {
+        height: 200px;
+        z-index: 50;
+        left: 250px;
+        bottom: $jumpStart;
+
+        transition: all ease-in-out 500ms;
+        --jump-time: 500ms;
+      }
+
+      &.jump1 {
+        bottom: $jumpStart + $jumpHeight;
+      }
+
+      &.jump2 {
+        bottom: $jumpStart + $jumpHeight + $jumpHeight * 0.75;
+      }
+
+      &.jump3 {
+        bottom: $jumpStart + $jumpHeight + $jumpHeight * 0.75 + $jumpHeight * 0.5;
+      }
+
+      &.over {
+        bottom: 4000px !important;
+      }
+
+      &.letter{
+        z-index: 100;
+        bottom: $jumpStart;
+        left: 1300px;
+      }
+    }
+  }
+}
