@@ -1,11 +1,13 @@
-$jumpStart: 50px;
-$jumpHeight: 150px;
 $jumpTime: 500ms;
 
 :host {
+  height: 95vh;
+  width: 95vw;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 
   div.root {
     position: relative;
@@ -27,22 +29,9 @@ $jumpTime: 500ms;
         height: 200px;
         z-index: 50;
         left: 250px;
-        bottom: $jumpStart;
 
         transition: all ease-in-out 500ms;
         --jump-time: 500ms;
-      }
-
-      &.jump1 {
-        bottom: $jumpStart + $jumpHeight;
-      }
-
-      &.jump2 {
-        bottom: $jumpStart + $jumpHeight + $jumpHeight * 0.75;
-      }
-
-      &.jump3 {
-        bottom: $jumpStart + $jumpHeight + $jumpHeight * 0.75 + $jumpHeight * 0.5;
       }
 
       &.over {
@@ -51,7 +40,7 @@ $jumpTime: 500ms;
 
       &.letter{
         z-index: 100;
-        bottom: $jumpStart;
+        bottom: 150px;
         left: 1300px;
       }
     }
