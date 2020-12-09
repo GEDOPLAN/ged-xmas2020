@@ -19,6 +19,10 @@ $jumpTime: 500ms;
         left: 130px;
       }
 
+      &.down{
+        transform: rotate(-90deg);
+    }
+
       &.top {
         height: 200px;
         z-index: 50;

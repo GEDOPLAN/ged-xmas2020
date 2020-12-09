@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit {
 
   currentRun: Subscription;
 
-  speed = 1;
+  speed = 10;
 
   showMessage = false;
 
@@ -37,6 +37,7 @@ export class AppComponent implements AfterViewInit {
     this.renderer.removeClass(this.snowman.nativeElement, 'jump2');
     this.renderer.removeClass(this.snowman.nativeElement, 'jump3');
     this.renderer.removeClass(this.snowman.nativeElement, 'over');
+    this.renderer.removeClass(this.snowman.nativeElement, 'down');
     this.jumps = 0;
   }
 
@@ -53,6 +54,15 @@ export class AppComponent implements AfterViewInit {
       const letter = letterArray[this.letterIndex].nativeElement;
       const current: string = getComputedStyle(letter).left;
       const newLeft = Number.parseInt(current.replace('px', ''), 10) - 10;
+      if (this.checkCollision(letterArray[this.letterIndex], this.snowman)) {
+        this.renderer.addClass(this.snowman.nativeElement, 'down');
+        this.currentRun.unsubscribe();
+        setTimeout(() => {
+          this.init();
+          this.reset();
+        }, 3000);
+        return;
+      }
       letter.style.left = newLeft + 'px';
       if (newLeft < -250) {
         this.letterIndex++;
@@ -95,5 +105,15 @@ export class AppComponent implements AfterViewInit {
     this.jumpTimer = timer(this.jumpTime);
 
     this.reset();
+  }
+
+  checkCollision(ele1: ElementRef, ele2: ElementRef): boolean {
+    const rect1 = ele2.nativeElement.getBoundingClientRect();
+    const rect2 = ele1.nativeElement.getBoundingClientRect();
+
+    return !(rect1.right < rect2.left ||
+      rect1.left > rect2.right ||
+      rect1.bottom < rect2.top ||
+      rect1.top > rect2.bottom);
   }
 }
