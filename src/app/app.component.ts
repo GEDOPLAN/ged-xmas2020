@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit {
 
   currentRun: Subscription;
 
-  speed = 10;
+  speed = 8;
 
   showMessage = false;
 
@@ -53,7 +53,7 @@ export class AppComponent implements AfterViewInit {
     this.currentRun = timer(0, this.speed).subscribe(() => {
       const letter = letterArray[this.letterIndex].nativeElement;
       const current: string = getComputedStyle(letter).left;
-      const newLeft = Number.parseInt(current.replace('px', ''), 10) - 10;
+      const newLeft = Number.parseInt(current.replace('px', ''), 10) - 8;
       if (this.checkCollision(letterArray[this.letterIndex], this.snowman)) {
         this.renderer.addClass(this.snowman.nativeElement, 'down');
         this.currentRun.unsubscribe();
