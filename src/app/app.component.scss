@@ -13,7 +13,7 @@ $jumpTime: 500ms;
     position: relative;
     overflow: hidden;
 
-    img {
+    img.wish, img.top, img.letter {
       position: absolute;
 
       &.wish{
